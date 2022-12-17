@@ -1,0 +1,6 @@
+{
+	"api_host":"https://microplastik.ru/api",
+	"chat_host":"https://microplastik.ru",
+	"couch_host":"http://localhost:5984",
+	"socket_path":"/api/socket.io/"
+}

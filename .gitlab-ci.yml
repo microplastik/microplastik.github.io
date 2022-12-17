@@ -1,0 +1,54 @@
+stages:
+  - build
+  - deploy
+
+build:
+  image: node:11.15.0
+  stage: build
+  # only: master
+  # cache:
+  #   key: ${CI_COMMIT_REF_SLUG}
+  #   paths:
+  #   - node_modules/
+
+  before_script:
+  - npm i
+
+  script:
+  - npm run build --production
+  
+  artifacts:
+    paths:
+    - dist/
+
+deploy: 
+  image: ubuntu:18.04
+  stage: deploy
+  # only: master
+  before_script: 
+    
+    # Add bash
+    - apt-get update
+    - apt-get install openssh-client openssh-server -y
+
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+
+    # For Docker builds disable host key checking. Be aware that by adding that
+    # you are suspectible to man-in-the-middle attacks.
+    # WARNING: Use this only with the Docker executor, if you use it with shell
+    # you will overwrite your user's SSH config.
+
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    # In order to properly check the server's host key, assuming you created the
+    # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
+    # instead.
+    # - mkdir -p ~/.ssh
+    # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
+  script:
+    - ls -1 ./dist
+    - scp -v -r ./dist/* gitlab-runner@84.201.137.113:~/microplastik.ru/output/
