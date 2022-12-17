@@ -121,10 +121,10 @@ export default {
     padding-top:65px;
     padding-left: 42px;
     background-color:transparent;
-    background-image: url(/static/img/logo.png);
+    background-image: url(/static/img/logo.svg);
     background-position:35px calc(100% - 25px);
     background-repeat: no-repeat;
-    background-size: 75px;
+    background-size: 120px;
     padding-top: 105px;
     filter: invert(100%);
 }
