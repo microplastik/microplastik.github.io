@@ -67,7 +67,7 @@ export default {
     },
     openEvents() {
       // if(this.mobile) return this.$router.push("/event/1")
-      return this.$router.push("/artists")
+      return this.$router.push("/contacts")
     },
     onScroll() {
       if(this.blockedScroll) return;

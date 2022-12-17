@@ -14,7 +14,7 @@
 		<div :class="nav_classname">
       <router-link to="/"         class="sys-nav-item">NEWS</router-link>
       <!-- <router-link to="/events/1" class="sys-nav-item">EVENTS</router-link> -->
-      <router-link to="/artists"  class="sys-nav-item">ARTISTS</router-link>
+      <!-- <router-link to="/artists"  class="sys-nav-item">ARTISTS</router-link> -->
       <router-link to="/contacts" class="sys-nav-item">CONTACTS</router-link>
       <a href="https://microplastik.bandcamp.com/" class="sys-nav-item" target="_blank">SHOP</a>
 		</div>
